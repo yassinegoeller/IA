@@ -1,0 +1,3 @@
+/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/CMakeFiles/IA.dir
