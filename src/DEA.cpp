@@ -2,7 +2,7 @@
 // Created by Yassine Goeller on 29/11/2019.
 //
 
-#include "DEA.h";
+#include"../header/DEA.h"
 
 void SetUpParams::independent_runs(const unsigned int val){
     _independent_runs = val;
