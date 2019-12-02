@@ -1,1 +1,3 @@
-/Library/Developer/CommandLineTools/usr/bin/c++  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/IA.dir/main.cpp.o  -o IA 
+"D:\Logiciel\JetBrains\CLion 2019.2.5\bin\cmake\win\bin\cmake.exe" -E remove -f CMakeFiles\IA.dir/objects.a
+D:\Logiciel\Compilateur\mingw64\bin\ar.exe cr CMakeFiles\IA.dir/objects.a @CMakeFiles\IA.dir\objects1.rsp
+D:\Logiciel\Compilateur\mingw64\bin\g++.exe -g   -Wl,--whole-archive CMakeFiles\IA.dir/objects.a -Wl,--no-whole-archive  -o IA.exe -Wl,--out-implib,libIA.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\IA.dir\linklibs.rsp

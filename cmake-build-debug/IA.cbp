@@ -8,82 +8,82 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug"/>
+				<Option working_dir="C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="rebuild_cache">
-				<Option working_dir="/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/Logiciel/Compilateur/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="D:/Logiciel/Compilateur/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Logiciel/Compilateur/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Logiciel/Compilateur/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="IA">
-				<Option output="/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/IA" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug"/>
+				<Option output="C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/IA.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/11.0.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="D:/Logiciel/Compilateur/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="D:/Logiciel/Compilateur/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/Logiciel/Compilateur/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="D:/Logiciel/Compilateur/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/Logiciel/Compilateur/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/Logiciel/Compilateur/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 IA"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/Logiciel/Compilateur/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 IA"/>
+					<CompileFile command="D:/Logiciel/Compilateur/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Logiciel/Compilateur/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Logiciel/Compilateur/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="IA/fast">
-				<Option output="/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/IA" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug"/>
+				<Option output="C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/IA.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/11.0.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="D:/Logiciel/Compilateur/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="D:/Logiciel/Compilateur/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/Logiciel/Compilateur/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="D:/Logiciel/Compilateur/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/Logiciel/Compilateur/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/Logiciel/Compilateur/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 IA/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/Logiciel/Compilateur/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 IA/fast"/>
+					<CompileFile command="D:/Logiciel/Compilateur/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Logiciel/Compilateur/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Logiciel/Compilateur/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/Logiciel/Compilateur/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="D:/Logiciel/Compilateur/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Logiciel/Compilateur/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Logiciel/Compilateur/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/Logiciel/Compilateur/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="D:/Logiciel/Compilateur/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Logiciel/Compilateur/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Logiciel/Compilateur/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/main.cpp">
+		<Unit filename="C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/main.cpp">
 			<Option target="IA"/>
 		</Unit>
-		<Unit filename="/Users/yassinegoeller/Documents/L3/semestre-5/IA/projet/IA/CMakeLists.txt">
+		<Unit filename="C:/Users/victo/Desktop/L3 MIAGE/IA/projet_DEA/IA/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
