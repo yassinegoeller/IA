@@ -7,6 +7,7 @@ int Problem::dimension() const{
     return _dimension;
 }
 //=======================================================================
+Solution::Solution(const Solution &sol) : _solution{sol._solution}, _fitness_current{sol._fitness_current}, _pbm{sol._pbm}{}
 const Problem& Solution::pbm() const{
     return _pbm;
 }
