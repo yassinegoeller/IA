@@ -20,4 +20,3 @@ void SetUpParams::solution_size(const unsigned int val){
     _solution_size = val;
 }
 
-string Setkk::zzz({})
