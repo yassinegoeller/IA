@@ -1,7 +1,3 @@
-//
-// Created by Yassine Goeller on 29/11/2019.
-//
-
 #ifndef IA_DEA_H
 #define IA_DEA_H
 #include <iostream>
@@ -9,25 +5,30 @@
 #include <cmath>
 #include <vector>
 
+
 //=======================================================================
 class Problem
 {
 public:
-    Problem();
+    Problem(double LowerBound, double UpperBound);
     ~Problem();
 
     int dimension() const;
+    double fit_fonction() const;
 
 private:
 
     int _dimension;
-    double LowerBound, UpperBound;
+    double _LowerBound, _UpperBound;
 };
+
+
 //=======================================================================
 class Solution
 {
 
 private:
+    std::vector<Problem> _problemList;
     std::vector<double> _solution;
     double _fitness_current;
     const Problem& _pbm;
@@ -50,8 +51,8 @@ public:
 
 };
 
-//=======================================================================
 
+//=======================================================================
 class SetUpParams
 {
     //ici vous devez mettre quelques param�tres tels que :

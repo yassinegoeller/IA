@@ -1,11 +1,15 @@
-//
-// Created by Yassine Goeller on 29/11/2019.
-//
 #include "DEA.h"
+
+
 //=======================================================================
+Problem::Problem(double LowerBound, double UpperBound) : _LowerBound{LowerBound}, _UpperBound{UpperBound},_dimension{20}
+{}
+
 int Problem::dimension() const{
     return _dimension;
 }
+
+
 //=======================================================================
 Solution::Solution(const Solution &sol) : _solution{sol._solution}, _fitness_current{sol._fitness_current}, _pbm{sol._pbm}{}
 Solution::~Solution(){}
@@ -28,4 +32,6 @@ void SetUpParams::population_size(const unsigned int val){
 void SetUpParams::solution_size(const unsigned int val){
     _solution_size = val;
 }
+
+
 //=======================================================================
