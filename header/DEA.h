@@ -99,7 +99,7 @@ public:
 
     const std::vector<Solution*>& current_solutions() const;
 
-    unsigned double global_best_cost() const;
+    double global_best_cost() const;
 
     Solution& solution(const unsigned int index) const;
 
