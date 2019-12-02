@@ -1,9 +1,12 @@
 //
 // Created by Yassine Goeller on 29/11/2019.
 //
-
-#include "DEA.cpp";
-
+#include "DEA.h"
+//=======================================================================
+int Problem::dimension() const{
+    return _dimension;
+}
+//=======================================================================
 void SetUpParams::independent_runs(const unsigned int val){
     _independent_runs = val;
 }
@@ -19,4 +22,4 @@ void SetUpParams::population_size(const unsigned int val){
 void SetUpParams::solution_size(const unsigned int val){
     _solution_size = val;
 }
-
+//=======================================================================
