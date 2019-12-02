@@ -7,6 +7,10 @@ int Problem::dimension() const{
     return _dimension;
 }
 //=======================================================================
+const Problem& Solution::pbm() const{
+    return _pbm;
+}
+//=======================================================================
 void SetUpParams::independent_runs(const unsigned int val){
     _independent_runs = val;
 }
