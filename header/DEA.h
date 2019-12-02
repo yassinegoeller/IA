@@ -6,7 +6,7 @@
 #include <vector>
 
 
-//=======================================================================
+//========================================================================
 class Problem
 {
 public:
@@ -15,6 +15,7 @@ public:
 
     int dimension() const;
     double fit_fonction() const;
+
 
 private:
 
