@@ -1,4 +1,7 @@
 #include "DEA.h"
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
 
 
 //=======================================================================
@@ -22,6 +25,17 @@ Solution::Solution(const Solution &sol) : _solution{sol._solution}, _fitness_cur
 Solution::~Solution(){}
 const Problem& Solution::pbm() const{
     return _pbm;
+}
+void Solution::initialize()
+{
+    srand(time(NULL)); SetUpParams param{};
+    double taille = _pbm.UpperBound()-_pbm.LowerBound();
+    double aleatoire = (double) rand() / RAND_MAX;
+    for(int i = 0; i < param.population_size(); ++i)
+    {
+        _solution[i] = _pbm.LowerBound() + aleatoire * taille;
+
+    }
 }
 //=======================================================================
 void SetUpParams::independent_runs(const unsigned int val){
