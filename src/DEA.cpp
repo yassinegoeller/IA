@@ -40,6 +40,13 @@ const Problem& Solution::pbm() const{
     return _pbm;
 }
 
+
+double Solution::get_fitness()
+{
+    return _fitness_current;
+}
+
+
 double Solution::fitness() {
     switch (this->_pbm.idenity()) {
         case 1:;
@@ -49,12 +56,6 @@ double Solution::fitness() {
         case 5:;
         case 6:;
     };
-}
-
-double Solution::get_fitness()
-{
-    return _fitness_current;
-}
 
 }
 //=======================================================================
