@@ -17,7 +17,7 @@ public:
     double fit_fonction(std::vector<double> x) const;
     double LowerBound()const;
     double UpperBound()const;
-
+    int idenity() const;
 
 private:
     int _dimension,_identity;
@@ -72,7 +72,7 @@ private:
     unsigned int   _solution_size;	        // size of each particle
 
 public:
-    SetUpParams ();
+        SetUpParams ();
 
     const unsigned int   independent_runs() const;
     const unsigned int   nb_evolution_steps() const;

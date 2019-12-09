@@ -67,11 +67,35 @@ double Problem::weierstrassFunction(std::vector<double> x) const {
     return resultat1-resultat2;
 }
 
+int Problem::idenity() const
+{
+    return type;
+}
+
 //=======================================================================
 Solution::Solution(const Solution &sol) : _solution{sol._solution}, _fitness_current{sol._fitness_current}, _pbm{sol._pbm}{}
 Solution::~Solution(){}
 const Problem& Solution::pbm() const{
     return _pbm;
+}
+
+
+double Solution::get_fitness()
+{
+    return _fitness_current;
+}
+
+
+double Solution::fitness() {
+    switch (this->_pbm.idenity()) {
+        case 1:;
+        case 2:;
+        case 3:;
+        case 4:;
+        case 5:;
+        case 6:;
+    };
+
 }
 //=======================================================================
 void SetUpParams::independent_runs(const unsigned int val){
