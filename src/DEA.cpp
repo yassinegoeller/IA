@@ -17,15 +17,54 @@ double Problem::UpperBound() const
 double Problem::LowerBound() const
 { return _LowerBound;}
 
-double Problem::fit_fonction() const {
-    switch(type){
-        case 1 : ;
-        case 2 : ;
-        case 3 : ;
+double Problem::fit_fonction(std::vector<double> x) const {
+    double resultat;
+    switch(_identity){
+        case 1 :
+            resultat = bentCigarFunction(x);
+            break;
+        case 2 :
+            resultat = discusFunction(x);
+            break;
+        case 3 :
+            resultat = weierstrassFunction(x);
+            break;
         case 4 : ;
         case 5 : ;
         case 6 : ;
     }
+    return resultat;
+}
+
+double Problem::bentCigarFunction(std::vector<double> x) const {
+    double resultat = x.at(0);
+    for(int i=1; i<_dimension; i++) {
+        resultat += pow(10,6) * pow(x.at(i),2);
+    }
+    return resultat;
+}
+
+double Problem::discusFunction(std::vector<double> x) const {
+    double resultat = pow(10,6) * pow(x.at(0),2);
+    for(int i=1; i<_dimension; i++){
+        resultat += pow(x.at(i),2);
+    }
+    return resultat;
+}
+
+double Problem::weierstrassFunction(std::vector<double> x) const {
+    const double pi = 3.14159265358979323846;
+    double resultat1 = 0, resultat2 = 0, a = 0.5;
+    int b = 3, kmax = 20;
+    for(int i=0; i<_dimension; ++i){
+        for(int k=0; k<=kmax; ++k) {
+            resultat1 += (pow(a,k) * cos((2*pi*pow(b, k)) * x.at(i)+0.5));
+            resultat2 += pow(a,k) * cos(2*pi*pow(b,k)*0.5);
+        }
+    }
+    resultat2 = _dimension * resultat2;
+
+    return resultat1-resultat2;
 }
 
 //=======================================================================

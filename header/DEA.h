@@ -10,19 +10,24 @@
 class Problem
 {
 public:
-    Problem(double LowerBound, double UpperBound,int i);
+    Problem(double LowerBound, double UpperBound, int identity);
     ~Problem();
 
     int dimension() const;
-    double fit_fonction() const;
+    double fit_fonction(std::vector<double> x) const;
     double LowerBound()const;
     double UpperBound()const;
 
 
 private:
-    int type;
     int _dimension,_identity;
     double _LowerBound, _UpperBound;
+
+    double bentCigarFunction(std::vector<double> vector) const;
+
+    double discusFunction(std::vector<double> vector) const;
+
+    double weierstrassFunction(std::vector<double> vector) const;
 };
 
 
