@@ -17,7 +17,7 @@ public:
     double fit_fonction(std::vector<double> x) const;
     double LowerBound()const;
     double UpperBound()const;
-    int idenity() const;
+    int identity() const;
 
 private:
     int _dimension,_identity;

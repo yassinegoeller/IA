@@ -67,9 +67,9 @@ double Problem::weierstrassFunction(std::vector<double> x) const {
     return resultat1-resultat2;
 }
 
-int Problem::idenity() const
+int Problem::identity() const
 {
-    return type;
+    return identity();
 }
 
 //=======================================================================
@@ -87,7 +87,7 @@ double Solution::get_fitness()
 
 
 double Solution::fitness() {
-    switch (this->_pbm.idenity()) {
+    switch (this->_pbm.identity()) {
         case 1:;
         case 2:;
         case 3:;
