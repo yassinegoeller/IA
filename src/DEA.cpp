@@ -64,7 +64,7 @@ double Problem::weierstrassFunction(std::vector<double> x) const {
     }
     resultat2 = _dimension * resultat2;
 
-    return resultat1-resultat2;
+    return resultat1 - resultat2;
 }
 
 int Problem::identity() const
