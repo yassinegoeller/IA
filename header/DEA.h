@@ -17,7 +17,7 @@ public:
     double fit_fonction() const;
     double LowerBound()const;
     double UpperBound()const;
-
+    int idenity() const;
 
 private:
     int type;
@@ -67,7 +67,7 @@ private:
     unsigned int   _solution_size;	        // size of each particle
 
 public:
-    SetUpParams ();
+        SetUpParams ();
 
     const unsigned int   independent_runs() const;
     const unsigned int   nb_evolution_steps() const;
