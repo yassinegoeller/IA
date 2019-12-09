@@ -1,7 +1,4 @@
 #include "DEA.h"
-#include <cmath>
-#include <cstdlib>
-#include <ctime>
 
 
 //=======================================================================
@@ -36,6 +33,25 @@ void Solution::initialize()
         _solution[i] = _pbm.LowerBound() + aleatoire * taille;
 
     }
+}
+
+
+double Solution::get_fitness()
+{
+    return _fitness_current;
+}
+
+
+double Solution::fitness() {
+    switch (this->_pbm.identity()) {
+        case 1:;
+        case 2:;
+        case 3:;
+        case 4:;
+        case 5:;
+        case 6:;
+    };
+
 }
 //=======================================================================
 void SetUpParams::independent_runs(const unsigned int val){

@@ -10,19 +10,24 @@
 class Problem
 {
 public:
-    Problem(double LowerBound, double UpperBound,int i);
+    Problem(double LowerBound, double UpperBound, int identity);
     ~Problem();
 
     int dimension() const;
-    double fit_fonction() const;
+    double fit_fonction(std::vector<double> x) const;
     double LowerBound()const;
     double UpperBound()const;
-
+    int identity() const;
 
 private:
-
     int _dimension,_identity;
     double _LowerBound, _UpperBound;
+
+    double bentCigarFunction(std::vector<double> vector) const;
+
+    double discusFunction(std::vector<double> vector) const;
+
+    double weierstrassFunction(std::vector<double> vector) const;
 };
 
 
@@ -67,7 +72,7 @@ private:
     unsigned int   _solution_size;	        // size of each particle
 
 public:
-    SetUpParams ();
+        SetUpParams ();
 
     const unsigned int   independent_runs() const;
     const unsigned int   nb_evolution_steps() const;
