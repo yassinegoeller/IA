@@ -17,6 +17,17 @@ double Problem::UpperBound() const
 double Problem::LowerBound() const
 { return _LowerBound;}
 
+double Problem::fit_fonction() const {
+    switch(type){
+        case 1 : ;
+        case 2 : ;
+        case 3 : ;
+        case 4 : ;
+        case 5 : ;
+        case 6 : ;
+    }
+}
+
 //=======================================================================
 Solution::Solution(const Solution &sol) : _solution{sol._solution}, _fitness_current{sol._fitness_current}, _pbm{sol._pbm}{}
 Solution::~Solution(){}

@@ -20,7 +20,7 @@ public:
 
 
 private:
-
+    int type;
     int _dimension,_identity;
     double _LowerBound, _UpperBound;
 };
