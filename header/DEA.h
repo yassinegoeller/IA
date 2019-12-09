@@ -10,16 +10,18 @@
 class Problem
 {
 public:
-    Problem(double LowerBound, double UpperBound);
+    Problem(double LowerBound, double UpperBound,int i);
     ~Problem();
 
     int dimension() const;
     double fit_fonction() const;
+    double LowerBound()const;
+    double UpperBound()const;
 
 
 private:
 
-    int _dimension;
+    int _dimension,_identity;
     double _LowerBound, _UpperBound;
 };
 
