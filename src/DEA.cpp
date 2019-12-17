@@ -73,8 +73,17 @@ int Problem::identity() const
 }
 
 //=======================================================================
+
 Solution::Solution(const Solution &sol) : _solution{sol._solution}, _fitness_current{sol._fitness_current}, _pbm{sol._pbm}{}
+
+Solution::Solution(const Problem &pbm) : _solution{}, _fitness_current{}, _pbm{pbm}
+{
+    initialize();
+    _fitness_current = fitness();
+}
+
 Solution::~Solution(){}
+
 const Problem& Solution::pbm() const{
     return _pbm;
 }
@@ -90,18 +99,32 @@ void Solution::initialize()
     }
 }
 
+double Solution::fitness() {
+    return this->_pbm.fit_fonction(this->_solution);
+}
 
 double Solution::get_fitness()
 {
     return _fitness_current;
 }
 
+std::vector<double> & Solution::get_solution()
+{
+    return _solution;
+}
 
-double Solution::fitness() {
-    return this->_pbm.fit_fonction(this->_solution);
-};
+double & Solution::get_position_in_solution(const int index)
+{
+    return _solution[index];
+}
+
+void Solution::set_position_in_solution(const int index, const double value)
+{
+    _solution[index] = value;
+}
 
 //=======================================================================
+
 void SetUpParams::independent_runs(const unsigned int val){
     _independent_runs = val;
 }
