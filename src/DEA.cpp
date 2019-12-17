@@ -21,7 +21,7 @@ double Problem::LowerBound() const
 
 double Problem::fit_fonction(std::vector<double> x) const {
     double resultat;
-    switch(identity()){
+    switch(_identity){
         case 1 :
             resultat = bentCigarFunction(x);
             break;
@@ -71,7 +71,7 @@ double Problem::weierstrassFunction(std::vector<double> x) const {
 
 int Problem::identity() const
 {
-    return _identity;
+    return identity();
 }
 
 //=======================================================================
@@ -127,39 +127,60 @@ void Solution::set_position_in_solution(const int index, const double value)
 
 //=======================================================================
 
-SetUpParams::SetUpParams() {
-    independent_runs();
-    nb_evolution_steps();
-    population_size();
-    solution_size() ;
+SetUpParams::SetUpParams() : _independent_runs{30}, _nb_evolution_steps{50000},
+_population_size{40}, _solution_size{20}, _Pc{0.5}, _Pm{0.1}
+{}
+
+SetUpParams::~SetUpParams()
+{}
+
+const unsigned int SetUpParams::independent_runs() const {
+    return _independent_runs;
 }
 
-SetUpParams::SetUpParams(SetUpParams &params){
-    independent_runs(this->independent_runs());
-    nb_evolution_steps(this->nb_evolution_steps());
-    population_size(this->population_size());
-    solution_size(this->solution_size());
+const unsigned int SetUpParams::nb_evolution_steps() const {
+    return _nb_evolution_steps;
 }
 
-void SetUpParams::independent_runs(const unsigned int val){
+const unsigned int SetUpParams::population_size() const {
+    return _population_size;
+}
+
+const unsigned int SetUpParams::solution_size() const {
+    return _solution_size;
+}
+
+const double SetUpParams::Pc() const {
+    return _Pc;
+}
+
+const double SetUpParams::Pm() const {
+    return _Pm;
+}
+
+void SetUpParams::independent_runs(const unsigned int val) {
     _independent_runs = val;
 }
 
-void SetUpParams::nb_evolution_steps(const unsigned int val){
+void SetUpParams::nb_evolution_steps(const unsigned int val) {
     _nb_evolution_steps = val;
 }
 
-void SetUpParams::population_size(const unsigned int val){
+void SetUpParams::population_size(const unsigned int val) {
     _population_size = val;
 }
 
-void SetUpParams::solution_size(const unsigned int val){
+void SetUpParams::solution_size(const unsigned int val) {
     _solution_size = val;
 }
 
+void SetUpParams::Pc(const double val) {
+    _Pc = val;
+}
+
+void SetUpParams::Pm(const double val) {
+    _Pm = val;
+}
 
 //=======================================================================
 
-Algorithm::Algorithm(const Problem &pbm, const SetUpParams &setup): _setup{setup} {
-
-}
