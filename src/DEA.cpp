@@ -2,6 +2,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
+
 //=======================================================================
 Problem::Problem(double LowerBound, double UpperBound,int i) : _LowerBound{LowerBound}, _UpperBound{UpperBound},_dimension{20},_identity{i}
 {}
@@ -90,10 +91,10 @@ const Problem& Solution::pbm() const{
 }
 void Solution::initialize()
 {
-    srand(time(NULL)); SetUpParams param{};
+    srand(time(NULL));
     double taille = _pbm.UpperBound()-_pbm.LowerBound();
     double aleatoire = (double) rand() / RAND_MAX;
-    for(int i = 0; i < param.population_size(); ++i)
+    for(int i = 0; i < _pbm.dimension(); ++i)
     {
         _solution[i] = _pbm.LowerBound() + aleatoire * taille;
 
