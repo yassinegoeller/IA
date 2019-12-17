@@ -91,9 +91,15 @@ double Problem::katsuuraFunction(std::vector<double> solution) const {
     return resultat1;
 }
 
-double Problem::happyCatFunction(std::vector<double> vector) const {
-
-    return 0;
+double Problem::happyCatFunction(std::vector<double> solution) const {
+    double somme1=0,somme2=0,somme3=0;
+    for (int i = 0; i <_dimension ; ++i) {
+        somme1+=solution.at(i)*solution.at(i)-_dimension;
+        somme2+=solution.at(i)*solution.at(i);
+        somme3+=solution.at(i);
+    }
+    double returnValue= abs(pow(somme1,1/4))+((0.5*somme2+somme3)/_dimension)+0.5;
+    return returnValue;
 }
 
 double Problem::HGBatFunction(std::vector<double> vector) const {
