@@ -7,6 +7,9 @@
 Problem::Problem(double LowerBound, double UpperBound,int i) : _LowerBound{LowerBound}, _UpperBound{UpperBound},_dimension{20},_identity{i}
 {}
 
+Problem::Problem(const Problem& pb) : _LowerBound{pb._LowerBound}, _UpperBound{pb._UpperBound},_dimension{20},_identity{pb._identity}
+{}
+
 int Problem::dimension() const{
     return _dimension;
 }
@@ -21,7 +24,7 @@ double Problem::LowerBound() const
 
 double Problem::fit_fonction(std::vector<double> x) const {
     double resultat;
-    switch(_identity){
+    switch(identity()){
         case 1 :
             resultat = bentCigarFunction(x);
             break;
@@ -71,7 +74,7 @@ double Problem::weierstrassFunction(std::vector<double> x) const {
 
 int Problem::identity() const
 {
-    return identity();
+    return _identity;
 }
 
 //=======================================================================
@@ -189,3 +192,8 @@ void SetUpParams::Pm(const double val) {
 
 //=======================================================================
 
+Algorithm::Algorithm(const Problem &pbm, const SetUpParams &setup): _setup{setup} {
+    for(int i = 0; i<setup.population_size(), i++){
+
+    }
+}

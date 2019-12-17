@@ -10,6 +10,7 @@ class Problem
 {
 public:
     Problem(double LowerBound, double UpperBound, int identity);
+    Problem(const Problem& pb);
     ~Problem();
 
     int dimension() const;
