@@ -15,8 +15,8 @@ public:
 
     int dimension() const;
     double fit_fonction(std::vector<double> x) const;
-    double LowerBound()const;
-    double UpperBound()const;
+    double LowerBound() const;
+    double UpperBound() const;
     int identity() const;
 
 private:
@@ -36,7 +36,6 @@ class Solution
 {
 
 private:
-    std::vector<Problem> _problemList;
     std::vector<double> _solution;
     double _fitness_current;
     const Problem& _pbm;
