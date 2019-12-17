@@ -128,7 +128,8 @@ void Solution::set_position_in_solution(const int index, const double value)
 //=======================================================================
 
 SetUpParams::SetUpParams() : _independent_runs{30}, _nb_evolution_steps{50000},
-_population_size{40}, _solution_size{20}{}
+_population_size{40}, _solution_size{20}, _Pc{0.5}, _Pm{0.1}
+{}
 
 SetUpParams::~SetUpParams()
 {}
@@ -149,6 +150,14 @@ const unsigned int SetUpParams::solution_size() const {
     return _solution_size;
 }
 
+const double SetUpParams::Pc() const {
+    return _Pc;
+}
+
+const double SetUpParams::Pm() const {
+    return _Pm;
+}
+
 void SetUpParams::independent_runs(const unsigned int val) {
     _independent_runs = val;
 }
@@ -163,6 +172,14 @@ void SetUpParams::population_size(const unsigned int val) {
 
 void SetUpParams::solution_size(const unsigned int val) {
     _solution_size = val;
+}
+
+void SetUpParams::Pc(const double val) {
+    _Pc = val;
+}
+
+void SetUpParams::Pm(const double val) {
+    _Pm = val;
 }
 
 //=======================================================================
