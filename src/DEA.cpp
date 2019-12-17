@@ -1,6 +1,7 @@
 #include "DEA.h"
-
-
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
 //=======================================================================
 Problem::Problem(double LowerBound, double UpperBound,int i) : _LowerBound{LowerBound}, _UpperBound{UpperBound},_dimension{20},_identity{i}
 {}
