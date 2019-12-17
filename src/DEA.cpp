@@ -1,4 +1,5 @@
 #include "DEA.h"
+#include <ctime>
 
 
 //=======================================================================
@@ -19,7 +20,7 @@ double Problem::LowerBound() const
 
 double Problem::fit_fonction(std::vector<double> x) const {
     double resultat;
-    switch(_identity){
+    switch(identity()){
         case 1 :
             resultat = bentCigarFunction(x);
             break;
@@ -69,7 +70,7 @@ double Problem::weierstrassFunction(std::vector<double> x) const {
 
 int Problem::identity() const
 {
-    return identity();
+    return _identity;
 }
 
 //=======================================================================
@@ -89,10 +90,10 @@ const Problem& Solution::pbm() const{
 }
 void Solution::initialize()
 {
-    srand(time(NULL)); SetUpParams param{};
+    srand(time(NULL));
     double taille = _pbm.UpperBound()-_pbm.LowerBound();
     double aleatoire = (double) rand() / RAND_MAX;
-    for(int i = 0; i < param.population_size(); ++i)
+    for(int i = 0; i < _pbm.dimension(); ++i)
     {
         _solution[i] = _pbm.LowerBound() + aleatoire * taille;
 
