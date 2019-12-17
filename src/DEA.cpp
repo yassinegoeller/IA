@@ -98,16 +98,9 @@ double Solution::get_fitness()
 
 
 double Solution::fitness() {
-    switch (this->_pbm.identity()) {
-        case 1:;
-        case 2:;
-        case 3:;
-        case 4:;
-        case 5:;
-        case 6:;
-    };
+    return this->_pbm.fit_fonction(this->_solution);
+};
 
-}
 //=======================================================================
 void SetUpParams::independent_runs(const unsigned int val){
     _independent_runs = val;
