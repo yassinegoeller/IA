@@ -34,9 +34,15 @@ double Problem::fit_fonction(std::vector<double> x) const {
         case 3 :
             resultat = weierstrassFunction(x);
             break;
-        case 4 : ;
-        case 5 : ;
-        case 6 : ;
+        case 4 :
+            resultat = katsuuraFunction(x);
+            break;
+        case 5 :
+            resultat = happyCatFunction(x);
+            break;
+        case 6 :
+            resultat = HGBatFunction(x);
+            break;
     }
     return resultat;
 }
@@ -70,6 +76,28 @@ double Problem::weierstrassFunction(std::vector<double> x) const {
     resultat2 = _dimension * resultat2;
 
     return resultat1 - resultat2;
+}
+
+double Problem::katsuuraFunction(std::vector<double> solution) const {
+    double resultat1=10/(_dimension*_dimension),resultat2=0,resultat3=0;
+    for (int i = 0; i <_dimension ; ++i) {
+        for (int j = 0; j <32 ; ++j) {
+            double tempo = abs(pow(2,j)*solution.at(i)-round(pow(2,j)*solution.at(i)))/pow(2,j);
+            resultat2= resultat2 + tempo;
+        }
+        resultat3=resultat3*(1+i*resultat2);
+    }
+    resultat1=resultat1*pow(resultat3,10/pow(_dimension,1.2))-(10/_dimension*_dimension);
+    return resultat1;
+}
+
+double Problem::happyCatFunction(std::vector<double> vector) const {
+
+    return 0;
+}
+
+double Problem::HGBatFunction(std::vector<double> vector) const {
+    return 0;
 }
 
 int Problem::identity() const

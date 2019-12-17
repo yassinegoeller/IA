@@ -26,6 +26,9 @@ private:
     double bentCigarFunction(std::vector<double> vector) const;
     double discusFunction(std::vector<double> vector) const;
     double weierstrassFunction(std::vector<double> vector) const;
+    double katsuuraFunction(std::vector<double> vector) const;
+    double happyCatFunction(std::vector<double> vector) const;
+    double HGBatFunction(std::vector<double> vector) const;
 };
 
 
