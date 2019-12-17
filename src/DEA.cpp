@@ -131,6 +131,11 @@ SetUpParams::SetUpParams() : _independent_runs{30}, _nb_evolution_steps{50000},
 _population_size{40}, _solution_size{20}, _Pc{0.5}, _Pm{0.1}
 {}
 
+SetUpParams::SetUpParams(const SetUpParams &setup) : _independent_runs{setup._independent_runs},
+_nb_evolution_steps{setup._nb_evolution_steps}, _population_size{setup.population_size()},
+_solution_size{setup._solution_size}, _Pc{setup._Pc}, _Pm{setup._Pm}
+{}
+
 SetUpParams::~SetUpParams()
 {}
 
