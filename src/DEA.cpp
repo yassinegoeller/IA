@@ -193,7 +193,10 @@ void SetUpParams::Pm(const double val) {
 //=======================================================================
 
 Algorithm::Algorithm(const Problem &pbm, const SetUpParams &setup): _setup{setup} {
-    for(int i = 0; i<setup.population_size(), i++){
-
+    for(int i = 0; i < setup.population_size(); ++i) {
+        _population[i] = new Solution {pbm};
+       _fitness_values_of_current_population[i] = _population[i]->fitness();
+       if (_global_best_solution->get_fitness() < _fitness_values_of_current_population[i])
+           _global_best_solution = _population[i];
     }
 }
