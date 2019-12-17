@@ -127,6 +127,20 @@ void Solution::set_position_in_solution(const int index, const double value)
 
 //=======================================================================
 
+SetUpParams::SetUpParams() {
+    independent_runs();
+    nb_evolution_steps();
+    population_size();
+    solution_size() ;
+}
+
+SetUpParams::SetUpParams(SetUpParams &params){
+    independent_runs(this->independent_runs());
+    nb_evolution_steps(this->nb_evolution_steps());
+    population_size(this->population_size());
+    solution_size(this->solution_size());
+}
+
 void SetUpParams::independent_runs(const unsigned int val){
     _independent_runs = val;
 }
@@ -145,3 +159,7 @@ void SetUpParams::solution_size(const unsigned int val){
 
 
 //=======================================================================
+
+Algorithm::Algorithm(const Problem &pbm, const SetUpParams &setup): _setup{setup} {
+
+}

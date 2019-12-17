@@ -72,6 +72,7 @@ private:
 
 public:
         SetUpParams ();
+        SetUpParams (SetUpParams& params);
 
     const unsigned int   independent_runs() const;
     const unsigned int   nb_evolution_steps() const;
