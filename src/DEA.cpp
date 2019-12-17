@@ -98,12 +98,18 @@ double Problem::happyCatFunction(std::vector<double> solution) const {
         somme2+=solution.at(i)*solution.at(i);
         somme3+=solution.at(i);
     }
-    double returnValue= abs(pow(somme1,1/4))+((0.5*somme2+somme3)/_dimension)+0.5;
+    double returnValue= pow(abs(somme1),1/4)+((0.5*somme2+somme3)/_dimension)+0.5;
     return returnValue;
 }
 
-double Problem::HGBatFunction(std::vector<double> vector) const {
-    return 0;
+double Problem::HGBatFunction(std::vector<double> solution) const {
+    double somme1=0,somme2=0;
+    for (int i = 0; i <_dimension ; ++i) {
+        somme1+=solution.at(i)*solution.at(i);
+        somme2+=solution.at(i);
+    }
+    double returnValue=pow(abs(somme1*somme1-somme2*somme2),1/2)+((0.5*somme1+somme2)/_dimension)+0.5;
+    return returnValue;
 }
 
 int Problem::identity() const
