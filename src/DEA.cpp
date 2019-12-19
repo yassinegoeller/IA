@@ -4,7 +4,7 @@
 #include <ctime>
 
 //=======================================================================
-Problem::Problem(double LowerBound, double UpperBound,int i) : _LowerBound{LowerBound}, _UpperBound{UpperBound},_dimension{20},_identity{i}
+Problem::Problem(double LowerBound, double UpperBound,int identity, int dimension) : _LowerBound{LowerBound}, _UpperBound{UpperBound},_dimension{dimension},_identity{identity}
 {}
 
 Problem::Problem(const Problem& pb) : _LowerBound{pb._LowerBound}, _UpperBound{pb._UpperBound},_dimension{20},_identity{pb._identity}
@@ -233,10 +233,14 @@ void SetUpParams::Pm(const double val) {
 //=======================================================================
 
 Algorithm::Algorithm(const Problem &pbm, const SetUpParams &setup): _setup{setup} {
-    for(int i = 0; i < setup.population_size(); ++i) {
+    for(int i = 0; i < _setup.population_size(); ++i) {
         _population[i] = new Solution {pbm};
-       _fitness_values_of_current_population[i] = _population[i]->fitness();
-       if (_global_best_solution->get_fitness() < _fitness_values_of_current_population[i])
-           _global_best_solution = _population[i];
+        _fitness_values_of_current_population[i] = _population[i]->fitness();
+        if (_global_best_solution->get_fitness() < _fitness_values_of_current_population[i])
+            _global_best_solution = _population[i];
     }
+}
+
+void Algorithm::initialize() {
+
 }
