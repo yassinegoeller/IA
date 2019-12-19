@@ -9,7 +9,7 @@
 class Problem
 {
 public:
-    Problem(double LowerBound, double UpperBound, int identity);
+    Problem(double LowerBound, double UpperBound, int identity, int dimension);
     Problem(const Problem& pb);
     ~Problem();
 
