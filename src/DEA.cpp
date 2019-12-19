@@ -25,22 +25,22 @@ double Problem::LowerBound() const
 double Problem::fit_fonction(std::vector<double> x) const {
     double resultat;
     switch(identity()){
-        case 1 :
+        case BENT_CIGAR_FUNCTION :
             resultat = bentCigarFunction(x);
             break;
-        case 2 :
+        case DISCUS_FUNCTION :
             resultat = discusFunction(x);
             break;
-        case 3 :
+        case WEIERSTRASS_FUNCTION :
             resultat = weierstrassFunction(x);
             break;
-        case 4 :
+        case KATSUURA_FUNCTION :
             resultat = katsuuraFunction(x);
             break;
-        case 5 :
+        case HAPPY_CAT_FUNCTION :
             resultat = happyCatFunction(x);
             break;
-        case 6 :
+        case HG_BAT_FUNCTION :
             resultat = HGBatFunction(x);
             break;
     }
