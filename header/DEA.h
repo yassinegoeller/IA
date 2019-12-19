@@ -4,6 +4,13 @@
 #include <fstream>
 #include <vector>
 
+#define BENT_CIGAR_FUNCTION 1
+#define DISCUS_FUNCTION 2
+#define WEIERSTRASS_FUNCTION 3
+#define KATSUURA_FUNCTION 4
+#define HAPPY_CAT_FUNCTION 5
+#define HG_BAT_FUNCTION 6
+
 
 //========================================================================
 class Problem
