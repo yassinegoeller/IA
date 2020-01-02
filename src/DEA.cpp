@@ -124,7 +124,7 @@ Solution::Solution(const Solution &sol) : _solution{sol._solution}, _fitness_cur
 Solution::Solution(const Problem &pbm) : _solution{}, _fitness_current{}, _pbm{pbm}
 {
     initialize();
-    _fitness_current = fitness();
+    _fitness_current = get_fitness();
 }
 
 Solution::~Solution(){}
@@ -142,10 +142,6 @@ void Solution::initialize()
         _solution[i] = _pbm.LowerBound() + aleatoire * taille;
 
     }
-}
-
-double Solution::fitness() {
-    return this->_pbm.fit_fonction(this->_solution);
 }
 
 double Solution::get_fitness()
@@ -232,15 +228,49 @@ void SetUpParams::Pm(const double val) {
 
 //=======================================================================
 
-Algorithm::Algorithm(const Problem &pbm, const SetUpParams &setup): _setup{setup} {
-    for(int i = 0; i < _setup.population_size(); ++i) {
-        _population[i] = new Solution {pbm};
-        _fitness_values_of_current_population[i] = _population[i]->fitness();
+Algorithm::Algorithm(const Problem &pbm, const SetUpParams &setup) : _setup{setup} {
+    initialize();
+}
+
+Algorithm::~Algorithm()
+{}
+
+const SetUpParams& Algorithm::setup() const
+{
+    return _setup;
+}
+
+void Algorithm::initialize()
+{
+    _population[0]->initialize();
+    _fitness_values_of_current_population[0] = _population[0]->get_fitness();
+    _global_best_solution = _population[0];
+    for(int i =1; i < _population.size(); ++i)
+    {
+        _population[i]->initialize();
+        _fitness_values_of_current_population[i] = _population[i]->get_fitness();
         if (_global_best_solution->get_fitness() < _fitness_values_of_current_population[i])
             _global_best_solution = _population[i];
     }
 }
 
-void Algorithm::initialize() {
-
+const std::vector<Solution*>& Algorithm::current_solutions() const
+{
+    return _population;
 }
+
+double Algorithm::global_best_cost() const
+{
+    return _global_best_solution->get_fitness();
+}
+
+Solution& Algorithm::solution(const unsigned int index) const
+{
+    return *_population[index];
+}
+
+Solution& Algorithm::global_best_solution() const
+{
+    return *_global_best_solution;
+}
+
