@@ -149,7 +149,7 @@ double Solution::get_fitness()
     return _fitness_current;
 }
 
-std::vector<double> & Solution::get_solution()
+std::vector<double>&  Solution::get_solution()
 {
     return _solution;
 }
@@ -167,12 +167,12 @@ void Solution::set_position_in_solution(const int index, const double value)
 //=======================================================================
 
 SetUpParams::SetUpParams() : _independent_runs{30}, _nb_evolution_steps{50000},
-_population_size{40}, _solution_size{20}, _Pc{0.5}, _Pm{0.1}
+_population_size{40}, _solution_size{20}, _Pc{0.5}, _Pm{0.1}, _CR{0.25}
 {}
 
 SetUpParams::SetUpParams(const SetUpParams &setup) : _independent_runs{setup._independent_runs},
 _nb_evolution_steps{setup._nb_evolution_steps}, _population_size{setup.population_size()},
-_solution_size{setup._solution_size}, _Pc{setup._Pc}, _Pm{setup._Pm}
+_solution_size{setup._solution_size}, _Pc{setup._Pc}, _Pm{setup._Pm}, _CR{setup._CR}
 {}
 
 SetUpParams::~SetUpParams()
@@ -201,6 +201,11 @@ const double SetUpParams::Pc() const {
 const double SetUpParams::Pm() const {
     return _Pm;
 }
+
+const double SetUpParams::CR() const {
+    return _CR;
+}
+
 
 void SetUpParams::independent_runs(const unsigned int val) {
     _independent_runs = val;
@@ -240,6 +245,16 @@ const SetUpParams& Algorithm::setup() const
     return _setup;
 }
 
+void Algorithm::evaluate()
+{
+    for(int i =1; i < _population.size(); ++i)
+    {
+        _fitness_values_of_current_population[i] = _population[i]->get_fitness();
+        if (_global_best_solution->get_fitness() < _fitness_values_of_current_population[i])
+            _global_best_solution = _population[i];
+    }
+}
+
 void Algorithm::initialize()
 {
     _population[0]->initialize();
@@ -274,3 +289,7 @@ Solution& Algorithm::global_best_solution() const
     return *_global_best_solution;
 }
 
+void Algorithm::evolution()
+{
+
+}
