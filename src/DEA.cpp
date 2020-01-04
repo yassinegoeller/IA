@@ -291,5 +291,47 @@ Solution& Algorithm::global_best_solution() const
 
 void Algorithm::evolution()
 {
-
+    for (int i = 0; i < _setup.independent_runs(); ++i)
+    {
+        int iG = random()%_setup.population_size();
+        int r1G = random()%_setup.population_size();
+        int r2G = random()%_setup.population_size();
+        int r3G = random()%_setup.population_size();
+        while (r1G == r2G || r1G == r3G || r1G == iG || r2G == r3G || r2G == iG || r3G == iG)
+        {
+            iG = random()%_setup.population_size();
+            r1G = random()%_setup.population_size();
+            r2G = random()%_setup.population_size();
+            r3G = random()%_setup.population_size();
+        }
+        int F = random()%3;
+        Solution viG1{*_population[iG]};
+        for (int j = 0; j < _setup.solution_size(); ++j)
+        {
+            viG1.set_position_in_solution(j, _population[r1G]->get_position_in_solution(j) + F * (_population[r2G]->get_position_in_solution(j) - _population[r3G]->get_position_in_solution(j)));
+        }
+        Solution uiG1{*_population[iG]};
+        int Irand = rand()%_setup.solution_size();
+        for (int k = 0; k < _setup.population_size(); ++k)
+        {
+            int randij = random()/RAND_MAX;
+            if (randij <= _setup.CR() || k == Irand)
+            {
+                uiG1.set_position_in_solution(k, viG1.get_position_in_solution(k));
+            }
+            if (randij > _setup.CR() && k != Irand)
+            {
+                uiG1.set_position_in_solution(k, _population[iG]->get_position_in_solution(k));
+            }
+        }
+        if (uiG1.get_fitness() <= _fitness_values_of_current_population[iG])
+        {
+            _population[iG] = &uiG1;
+        }
+        evaluate();
+    }
+    for (int l = 0; l < _setup.solution_size(); ++l)
+    {
+        std::cout << _global_best_solution->get_position_in_solution(l) << " ";
+    }
 }
