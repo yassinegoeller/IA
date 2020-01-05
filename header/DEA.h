@@ -57,7 +57,7 @@ public:
 
     void initialize();
     double fitness();
-    double get_fitness();
+    double get_fitness() const;
 
     std::vector<double>& get_solution();
 
@@ -79,6 +79,7 @@ private:
     unsigned int   _solution_size;          // size of each particle
     double _Pc;
     double _Pm;
+    double _CR;
 
 public:
     SetUpParams();
@@ -90,12 +91,14 @@ public:
     const unsigned int   solution_size() const;
     const double Pc() const;
     const double Pm() const;
+    const double CR() const;
     void independent_runs(const unsigned int val);
     void nb_evolution_steps(const unsigned int val);
     void population_size(const unsigned int val);
     void solution_size(const unsigned int val);
     void Pc(const double val);
     void Pm(const double val);
+    void CR(const double val);
 
     ~SetUpParams();
 };

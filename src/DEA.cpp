@@ -144,7 +144,13 @@ void Solution::initialize()
     }
 }
 
-double Solution::get_fitness()
+double Solution::fitness()
+{
+    _fitness_current = _pbm.fit_fonction(_solution);
+    return _fitness_current;
+}
+
+double Solution::get_fitness() const
 {
     return _fitness_current;
 }
@@ -258,12 +264,12 @@ void Algorithm::evaluate()
 void Algorithm::initialize()
 {
     _population[0]->initialize();
-    _fitness_values_of_current_population[0] = _population[0]->get_fitness();
+    _fitness_values_of_current_population[0] = _population[0]->fitness();
     _global_best_solution = _population[0];
     for(int i =1; i < _population.size(); ++i)
     {
         _population[i]->initialize();
-        _fitness_values_of_current_population[i] = _population[i]->get_fitness();
+        _fitness_values_of_current_population[i] = _population[i]->fitness();
         if (_global_best_solution->get_fitness() < _fitness_values_of_current_population[i])
             _global_best_solution = _population[i];
     }
@@ -324,7 +330,7 @@ void Algorithm::evolution()
                 uiG1.set_position_in_solution(k, _population[iG]->get_position_in_solution(k));
             }
         }
-        if (uiG1.get_fitness() <= _fitness_values_of_current_population[iG])
+        if (uiG1.fitness() <= _fitness_values_of_current_population[iG])
         {
             _population[iG] = &uiG1;
         }
@@ -332,6 +338,7 @@ void Algorithm::evolution()
     }
     for (int l = 0; l < _setup.solution_size(); ++l)
     {
-        std::cout << _global_best_solution->get_position_in_solution(l) << " ";
+        std::cout << _global_best_solution->get_position_in_solution(l) << " " << std::endl;
     }
+    std::cout << _global_best_solution->get_fitness();
 }
