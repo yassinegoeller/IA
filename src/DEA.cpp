@@ -136,12 +136,10 @@ void Solution::initialize()
 {
     srand(time(NULL));
     double taille = _pbm.UpperBound()-_pbm.LowerBound();
-    std::cout<<"taille : "<<taille;
     double aleatoire = rand() / RAND_MAX;
-    std::cout<<"aleatoire : "<<aleatoire;
     for(int i = 0; i < _pbm.dimension(); ++i)
     {
-        _solution[i] = _pbm.LowerBound() + (aleatoire * taille);
+        _solution.push_back(_pbm.LowerBound() + (aleatoire * taille));
     }
 }
 
@@ -242,7 +240,8 @@ void SetUpParams::Pm(const double val) {
 
 Algorithm::Algorithm(const Problem &pbm, const SetUpParams &setup) : _setup{setup} {
     for (int i = 0; i < _setup.population_size(); ++i) {
-        _population[0] = new Solution{pbm};
+        _population.push_back(new Solution{pbm});
+        std::cout<<i<<std::endl;
     }
     initialize();
 }
@@ -257,23 +256,25 @@ const SetUpParams& Algorithm::setup() const
 
 void Algorithm::evaluate()
 {
+    std::cout<<"EVALUATE"<<std::endl;
     for(int i =1; i < _population.size(); ++i)
     {
-        _fitness_values_of_current_population[i] = _population[i]->get_fitness();
+        _fitness_values_of_current_population.at(i) = _population[i]->get_fitness();
         if (_global_best_solution->get_fitness() < _fitness_values_of_current_population[i])
-            _global_best_solution = _population[i];
+            _global_best_solution = _population.at(i);
     }
 }
 
 void Algorithm::initialize()
 {
-    _global_best_solution = _population[0];
-    _fitness_values_of_current_population[0] = _population[0]->fitness();
+    std::cout<<"INITIALIZE"<<std::endl;
+    _global_best_solution = _population.at(0);
+    _fitness_values_of_current_population.push_back(_population.at(0)->fitness());
     for(int i = 0; i < _population.size(); ++i)
     {
-        _fitness_values_of_current_population[i] = _population[i]->fitness();
-        if (_global_best_solution->get_fitness() < _fitness_values_of_current_population[i])
-            _global_best_solution = _population[i];
+        _fitness_values_of_current_population.push_back(_population.at(i)->fitness());
+        if (_global_best_solution->get_fitness() < _fitness_values_of_current_population.at(i))
+            _global_best_solution = _population.at(i);
     }
 }
 
@@ -299,7 +300,7 @@ Solution& Algorithm::global_best_solution() const
 
 void Algorithm::evolution()
 {
-    initialize();
+    std::cout<<"EVOLUTION"<<std::endl;
     for (int i = 0; i < _setup.independent_runs(); ++i)
     {
         int iG = rand()%_setup.population_size();
@@ -314,12 +315,13 @@ void Algorithm::evolution()
             r3G = rand()%_setup.population_size();
         }
         int F = rand()%3;
-        Solution viG1{*_population[iG]};
+        Solution viG1{*_population.at(iG)};
         for (int j = 0; j < _setup.solution_size(); ++j)
         {
-            viG1.set_position_in_solution(j, _population[r1G]->get_position_in_solution(j) + F * (_population[r2G]->get_position_in_solution(j) - _population[r3G]->get_position_in_solution(j)));
+            viG1.set_position_in_solution(j, _population.at(r1G)->get_position_in_solution(j)
+            + F * (_population.at(r2G)->get_position_in_solution(j) - _population.at(r3G)->get_position_in_solution(j)));
         }
-        Solution uiG1{*_population[iG]};
+        Solution uiG1{*_population.at(iG)};
         int Irand = rand()%_setup.solution_size();
         for (int k = 0; k < _setup.population_size(); ++k)
         {
@@ -330,12 +332,12 @@ void Algorithm::evolution()
             }
             if (randij > _setup.CR() && k != Irand)
             {
-                uiG1.set_position_in_solution(k, _population[iG]->get_position_in_solution(k));
+                uiG1.set_position_in_solution(k, _population.at(iG)->get_position_in_solution(k));
             }
         }
-        if (uiG1.fitness() <= _fitness_values_of_current_population[iG])
+        if (uiG1.fitness() <= _fitness_values_of_current_population.at(iG))
         {
-            _population[iG] = &uiG1;
+            _population.at(iG) = &uiG1;
         }
         evaluate();
     }
