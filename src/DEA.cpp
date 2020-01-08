@@ -136,10 +136,11 @@ void Solution::initialize()
 {
     srand(time(NULL));
     double taille = _pbm.UpperBound()-_pbm.LowerBound();
-    double aleatoire = rand() / RAND_MAX;
     for(int i = 0; i < _pbm.dimension(); ++i)
     {
-        _solution.push_back(_pbm.LowerBound() + (aleatoire * taille));
+        double aleatoire = (double) rand()/RAND_MAX;
+        double valeur = _pbm.LowerBound() + (aleatoire * taille);
+        _solution.push_back(valeur);
     }
 }
 
@@ -257,10 +258,10 @@ const SetUpParams& Algorithm::setup() const
 void Algorithm::evaluate()
 {
     std::cout<<"EVALUATE"<<std::endl;
-    for(int i =1; i < _population.size(); ++i)
+    for(int i = 0; i < _population.size(); ++i)
     {
-        _fitness_values_of_current_population.at(i) = _population[i]->get_fitness();
-        if (_global_best_solution->get_fitness() < _fitness_values_of_current_population[i])
+        _fitness_values_of_current_population.at(i) = _population.at(i)->fitness();
+        if (_global_best_solution->get_fitness() < _fitness_values_of_current_population.at(i))
             _global_best_solution = _population.at(i);
     }
 }
