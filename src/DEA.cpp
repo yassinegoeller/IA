@@ -121,15 +121,15 @@ int Problem::identity() const
 
 Solution::Solution(const Solution &sol) : _fitness_current{sol._fitness_current}, _pbm{sol._pbm}
 {
-    for (int i = 0; i < _pbm.dimension(); ++i) {
-        _solution[i] = sol._solution[i];
+    for (int i = 0; i < sol.pbm().dimension(); ++i) {
+        _solution.push_back(sol._solution[i]);
     }
 }
 
 Solution::Solution(const Problem &pbm) : _solution{}, _fitness_current{}, _pbm{pbm}
 {
     initialize();
-    _fitness_current = get_fitness();
+    _fitness_current = fitness();
 }
 
 Solution::~Solution(){}
@@ -139,7 +139,6 @@ const Problem& Solution::pbm() const{
 }
 void Solution::initialize()
 {
-    srand(time(NULL));
     double taille = _pbm.UpperBound()-_pbm.LowerBound();
     double aleatoire = rand()/RAND_MAX;
     for(int i = 0; i < _pbm.dimension(); ++i)
@@ -231,6 +230,9 @@ void SetUpParams::CR(const double val) {
 //=======================================================================
 
 Algorithm::Algorithm(const Problem &pbm, const SetUpParams &setup) : _setup{setup}, _global_best_solution{pbm} {
+    for (int i = 0; i < _setup.population_size(); ++i) {
+        _population.push_back(pbm);
+    }
     initialize();
 }
 
@@ -258,7 +260,6 @@ void Algorithm::evaluate()
 
 void Algorithm::initialize()
 {
-    _population[0].initialize();
     for (int i = 0; i < _setup.solution_size(); ++i) {
         _global_best_solution.set_position_in_solution(i, _population[0].get_position_in_solution(i));
     }
@@ -266,7 +267,6 @@ void Algorithm::initialize()
     _fitness_values_of_current_population.push_back(_population.at(0).fitness());
     for(int i = 1; i < _population.size(); ++i)
     {
-        _population[i].initialize();
         _fitness_values_of_current_population.push_back(_population.at(i).fitness());
         if (_global_best_solution.get_fitness() < _fitness_values_of_current_population[i]) {
             for (int j = 0; j < _setup.solution_size(); ++j) {
@@ -306,7 +306,6 @@ void Algorithm::evolution()
         int r1G = rand()%_setup.population_size();
         int r2G = rand()%_setup.population_size();
         int r3G = rand()%_setup.population_size();
-        std::cout<<iG;
         while (r1G == r2G || r1G == r3G || r1G == iG || r2G == r3G || r2G == iG || r3G == iG)
         {
             iG = rand()%_setup.population_size();
@@ -338,8 +337,8 @@ void Algorithm::evolution()
         if (uiG1.fitness() <= _fitness_values_of_current_population.at(iG))
         {
             for (int j = 0; j < _setup.solution_size(); ++j) {
-                for (int j = 0; j < _setup.solution_size(); ++j) {
-                    _global_best_solution.set_position_in_solution(j, _population[i].get_position_in_solution(j));
+                for (int l = 0; l < _setup.solution_size(); ++l) {
+                    _global_best_solution.set_position_in_solution(l, _population[i].get_position_in_solution(l));
                     _global_best_solution.fitness();
                 }
             }
@@ -348,7 +347,7 @@ void Algorithm::evolution()
     }
     for (int l = 0; l < _setup.solution_size(); ++l)
     {
-        std::cout << _global_best_solution.get_position_in_solution(l) << " " << std::endl;
+        std::cout << _global_best_solution.get_position_in_solution(l) << " ";
     }
-    std::cout << _global_best_solution.get_fitness();
+    std::cout << std::endl << _global_best_solution.get_fitness();
 }
