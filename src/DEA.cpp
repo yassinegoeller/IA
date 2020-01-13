@@ -14,8 +14,6 @@ int Problem::dimension() const{
     return _dimension;
 }
 
-Problem::~Problem() {}
-
 double Problem::UpperBound() const
 { return _UpperBound;}
 
@@ -126,23 +124,19 @@ Solution::Solution(const Solution &sol) : _fitness_current{sol._fitness_current}
     }
 }
 
-Solution::Solution(const Problem &pbm) : _solution{}, _fitness_current{}, _pbm{pbm}
-{
+Solution::Solution(const Problem &pbm) : _solution{}, _fitness_current{}, _pbm{pbm} {
     initialize();
     _fitness_current = fitness();
 }
 
-Solution::~Solution(){}
-
-const Problem& Solution::pbm() const{
+const Problem& Solution::pbm() const {
     return _pbm;
 }
-void Solution::initialize()
-{
+void Solution::initialize() {
     double taille = _pbm.UpperBound()-_pbm.LowerBound();
-    double aleatoire = rand()/RAND_MAX;
     for(int i = 0; i < _pbm.dimension(); ++i)
     {
+        double aleatoire = (double)rand() / RAND_MAX;
         _solution.push_back(_pbm.LowerBound() + (aleatoire * taille));
     }
 }
@@ -152,23 +146,19 @@ double Solution::fitness() {
     return _fitness_current;
 }
 
-double Solution::get_fitness() const
-{
+double Solution::get_fitness() const {
     return _fitness_current;
 }
 
-std::vector<double>&  Solution::get_solution()
-{
+std::vector<double>&  Solution::get_solution() {
     return _solution;
 }
 
-double & Solution::get_position_in_solution(const int index)
-{
+double Solution::get_position_in_solution(const int index) const {
     return _solution[index];
 }
 
-void Solution::set_position_in_solution(const int index, const double value)
-{
+void Solution::set_position_in_solution(const int index, const double value) {
     _solution[index] = value;
 }
 
@@ -236,9 +226,6 @@ Algorithm::Algorithm(const Problem &pbm, const SetUpParams &setup) : _setup{setu
     initialize();
 }
 
-Algorithm::~Algorithm()
-{}
-
 const SetUpParams& Algorithm::setup() const
 {
     return _setup;
@@ -264,10 +251,10 @@ void Algorithm::initialize()
         _global_best_solution.set_position_in_solution(i, _population[0].get_position_in_solution(i));
     }
     _global_best_solution.fitness();
-    _fitness_values_of_current_population.push_back(_population.at(0).fitness());
+    _fitness_values_of_current_population.push_back(_population[0].fitness());
     for(int i = 1; i < _population.size(); ++i)
     {
-        _fitness_values_of_current_population.push_back(_population.at(i).fitness());
+        _fitness_values_of_current_population.push_back(_population[i].fitness());
         if (_global_best_solution.get_fitness() < _fitness_values_of_current_population[i]) {
             for (int j = 0; j < _setup.solution_size(); ++j) {
                 _global_best_solution.set_position_in_solution(j, _population[i].get_position_in_solution(j));
@@ -299,13 +286,14 @@ Solution Algorithm::global_best_solution() const
 
 void Algorithm::evolution()
 {
-    for (int i = 0; i < _setup.independent_runs(); ++i)
+    Solution viG1{_population[0].pbm()}, uiG1{_population[0].pbm()};
+    int iG, r1G, r2G, r3G, randij, Irand, F;
+    for (int i = 0; i < _setup.nb_evolution_steps(); ++i)
     {
-        initialize();
-        int iG = rand()%_setup.population_size();
-        int r1G = rand()%_setup.population_size();
-        int r2G = rand()%_setup.population_size();
-        int r3G = rand()%_setup.population_size();
+        iG = rand()%_setup.population_size();
+        r1G = rand()%_setup.population_size();
+        r2G = rand()%_setup.population_size();
+        r3G = rand()%_setup.population_size();
         while (r1G == r2G || r1G == r3G || r1G == iG || r2G == r3G || r2G == iG || r3G == iG)
         {
             iG = rand()%_setup.population_size();
@@ -313,34 +301,30 @@ void Algorithm::evolution()
             r2G = rand()%_setup.population_size();
             r3G = rand()%_setup.population_size();
         }
-        int F = rand()%3;
-        Solution viG1{_population.at(iG)};
+        F = rand()%3;
         for (int j = 0; j < _setup.solution_size(); ++j)
         {
-            viG1.set_position_in_solution(j, _population.at(r1G).get_position_in_solution(j)
-            + F * (_population.at(r2G).get_position_in_solution(j) - _population.at(r3G).get_position_in_solution(j)));
+            viG1.set_position_in_solution(j, (_population[r1G].get_position_in_solution(j) + ( F * (_population[r2G].get_position_in_solution(j) - _population[r3G].get_position_in_solution(j)))));
         }
-        Solution uiG1{_population[i].pbm()};
-        int Irand = rand()%_setup.solution_size();
-        for (int k = 0; k < _setup.population_size(); ++k)
+
+        Irand = rand()%_setup.solution_size();
+
+        for (int j = 0; j < _setup.solution_size(); ++j)
         {
-            int randij = rand()/RAND_MAX;
-            if (randij <= _setup.CR() || k == Irand)
+            randij = rand()/RAND_MAX;
+            if (randij <= _setup.CR() || j == Irand)
             {
-                uiG1.set_position_in_solution(k, viG1.get_position_in_solution(k));
+                uiG1.set_position_in_solution(j, viG1.get_position_in_solution(j));
             }
-            if (randij > _setup.CR() && k != Irand)
+            if (randij > _setup.CR() && j != Irand)
             {
-                uiG1.set_position_in_solution(k, _population.at(iG).get_position_in_solution(k));
+                uiG1.set_position_in_solution(j, (_population[iG].get_position_in_solution(j)));
             }
         }
-        if (uiG1.fitness() <= _fitness_values_of_current_population.at(iG))
+        if (uiG1.fitness() <= _fitness_values_of_current_population[iG])
         {
             for (int j = 0; j < _setup.solution_size(); ++j) {
-                for (int l = 0; l < _setup.solution_size(); ++l) {
-                    _global_best_solution.set_position_in_solution(l, _population[i].get_position_in_solution(l));
-                    _global_best_solution.fitness();
-                }
+                _population[iG].set_position_in_solution(j, uiG1.get_position_in_solution(j));
             }
         }
         evaluate();

@@ -18,7 +18,6 @@ class Problem
 public:
     Problem(double LowerBound, double UpperBound, int identity, int dimension);
     Problem(const Problem& pb);
-    ~Problem();
 
     int dimension() const;
     double fit_fonction(std::vector<double> x) const;
@@ -42,7 +41,6 @@ private:
 //=======================================================================
 class Solution
 {
-
 private:
     std::vector<double> _solution;
     double _fitness_current;
@@ -51,7 +49,6 @@ private:
 public:
     Solution (const Problem& pbm);
     Solution (const Solution& sol);
-    ~Solution();
 
     const Problem& pbm() const;
 
@@ -61,7 +58,7 @@ public:
 
     std::vector<double>& get_solution();
 
-    double& get_position_in_solution(const int index);
+    double get_position_in_solution(const int index) const;
     void  set_position_in_solution(const int index, const double value);
 
 };
@@ -109,7 +106,6 @@ private:
 
 public:
     Algorithm(const Problem& pbm,const SetUpParams& setup);
-    ~Algorithm();
 
     const SetUpParams& setup() const;
     void initialize();
