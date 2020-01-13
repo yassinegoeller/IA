@@ -77,8 +77,6 @@ private:
     unsigned int   _nb_evolution_steps;       // number of iterations per run
     unsigned int   _population_size;		// number of solutions in the population
     unsigned int   _solution_size;          // size of each particle
-    double _Pc;
-    double _Pm;
     double _CR;
 
 public:
@@ -89,15 +87,11 @@ public:
     const unsigned int   nb_evolution_steps() const;
     const unsigned int   population_size() const;
     const unsigned int   solution_size() const;
-    const double Pc() const;
-    const double Pm() const;
     const double CR() const;
     void independent_runs(const unsigned int val);
     void nb_evolution_steps(const unsigned int val);
     void population_size(const unsigned int val);
     void solution_size(const unsigned int val);
-    void Pc(const double val);
-    void Pm(const double val);
     void CR(const double val);
 
     ~SetUpParams();
@@ -108,10 +102,10 @@ public:
 class Algorithm
 {
 private:
-    std::vector<Solution*> _population;     // individuals in population
+    std::vector<Solution> _population;     // individuals in population
     std::vector<double> _fitness_values_of_current_population;
     const SetUpParams& _setup;
-    Solution* _global_best_solution;
+    Solution _global_best_solution;
 
 public:
     Algorithm(const Problem& pbm,const SetUpParams& setup);
@@ -123,13 +117,13 @@ public:
     // evaluate the current population
     void evaluate();
 
-    const std::vector<Solution*>& current_solutions() const;
+    const std::vector<Solution>& current_solutions() const;
 
     double global_best_cost() const;
 
-    Solution& solution(const unsigned int index) const;
+    Solution solution(const unsigned int index) const;
 
-    Solution& global_best_solution() const;
+    Solution global_best_solution() const;
 
     // main loop of the algorithm
     void evolution();

@@ -148,8 +148,7 @@ void Solution::initialize()
     }
 }
 
-double Solution::fitness()
-{
+double Solution::fitness() {
     _fitness_current = _pbm.fit_fonction(_solution);
     return _fitness_current;
 }
@@ -177,12 +176,12 @@ void Solution::set_position_in_solution(const int index, const double value)
 //=======================================================================
 
 SetUpParams::SetUpParams() : _independent_runs{30}, _nb_evolution_steps{50000},
-_population_size{40}, _solution_size{20}, _Pc{0.5}, _Pm{0.1}, _CR{0.25}
+_population_size{40}, _solution_size{20}, _CR{0.25}
 {}
 
 SetUpParams::SetUpParams(const SetUpParams &setup) : _independent_runs{setup._independent_runs},
 _nb_evolution_steps{setup._nb_evolution_steps}, _population_size{setup.population_size()},
-_solution_size{setup._solution_size}, _Pc{setup._Pc}, _Pm{setup._Pm}, _CR{setup._CR}
+_solution_size{setup._solution_size}, _CR{setup._CR}
 {}
 
 SetUpParams::~SetUpParams()
@@ -202,14 +201,6 @@ const unsigned int SetUpParams::population_size() const {
 
 const unsigned int SetUpParams::solution_size() const {
     return _solution_size;
-}
-
-const double SetUpParams::Pc() const {
-    return _Pc;
-}
-
-const double SetUpParams::Pm() const {
-    return _Pm;
 }
 
 const double SetUpParams::CR() const {
@@ -233,21 +224,13 @@ void SetUpParams::solution_size(const unsigned int val) {
     _solution_size = val;
 }
 
-void SetUpParams::Pc(const double val) {
-    _Pc = val;
-}
-
-void SetUpParams::Pm(const double val) {
-    _Pm = val;
+void SetUpParams::CR(const double val) {
+    _CR = val;
 }
 
 //=======================================================================
 
-Algorithm::Algorithm(const Problem &pbm, const SetUpParams &setup) : _setup{setup} {
-    for (int i = 0; i < _setup.population_size(); ++i) {
-        _population.push_back(new Solution{pbm});
-        std::cout<<i<<std::endl;
-    }
+Algorithm::Algorithm(const Problem &pbm, const SetUpParams &setup) : _setup{setup}, _global_best_solution{pbm} {
     initialize();
 }
 
@@ -261,13 +244,13 @@ const SetUpParams& Algorithm::setup() const
 
 void Algorithm::evaluate()
 {
-    std::cout<<"EVALUATE"<<std::endl;
     for(int i =0; i < _population.size(); ++i)
     {
-        _fitness_values_of_current_population.at(i) = _population.at(i)->fitness();
-        if (_global_best_solution->get_fitness() < _fitness_values_of_current_population.at(i)) {
+        _fitness_values_of_current_population[i] = _population[i].fitness();
+        if (_global_best_solution.get_fitness() < _fitness_values_of_current_population[i]) {
             for (int j = 0; j < _setup.solution_size(); ++j) {
-                _global_best_solution->set_position_in_solution(j, _population.at(i)->get_position_in_solution(j));
+                _global_best_solution.set_position_in_solution(j, _population[i].get_position_in_solution(j));
+                _global_best_solution.fitness();
             }
         }
     }
@@ -275,49 +258,55 @@ void Algorithm::evaluate()
 
 void Algorithm::initialize()
 {
-    std::cout<<"INITIALIZE"<<std::endl;
-    _global_best_solution = _population.at(0);
-    _fitness_values_of_current_population.push_back(_population.at(0)->fitness());
-    for(int i = 0; i < _population.size(); ++i)
+    _population[0].initialize();
+    for (int i = 0; i < _setup.solution_size(); ++i) {
+        _global_best_solution.set_position_in_solution(i, _population[0].get_position_in_solution(i));
+    }
+    _global_best_solution.fitness();
+    _fitness_values_of_current_population.push_back(_population.at(0).fitness());
+    for(int i = 1; i < _population.size(); ++i)
     {
-        _fitness_values_of_current_population.push_back(_population.at(i)->fitness());
-        if (_global_best_solution->get_fitness() < _fitness_values_of_current_population.at(i)) {
+        _population[i].initialize();
+        _fitness_values_of_current_population.push_back(_population.at(i).fitness());
+        if (_global_best_solution.get_fitness() < _fitness_values_of_current_population[i]) {
             for (int j = 0; j < _setup.solution_size(); ++j) {
-                _global_best_solution->set_position_in_solution(j, _population.at(i)->get_position_in_solution(j));
+                _global_best_solution.set_position_in_solution(j, _population[i].get_position_in_solution(j));
+                _global_best_solution.fitness();
             }
         }
     }
 }
 
-const std::vector<Solution*>& Algorithm::current_solutions() const
+const std::vector<Solution>& Algorithm::current_solutions() const
 {
     return _population;
 }
 
 double Algorithm::global_best_cost() const
 {
-    return _global_best_solution->get_fitness();
+    return _global_best_solution.get_fitness();
 }
 
-Solution& Algorithm::solution(const unsigned int index) const
+Solution Algorithm::solution(const unsigned int index) const
 {
-    return *_population[index];
+    return _population[index];
 }
 
-Solution& Algorithm::global_best_solution() const
+Solution Algorithm::global_best_solution() const
 {
-    return *_global_best_solution;
+    return _global_best_solution;
 }
 
 void Algorithm::evolution()
 {
-    std::cout<<"EVOLUTION"<<std::endl;
     for (int i = 0; i < _setup.independent_runs(); ++i)
     {
+        initialize();
         int iG = rand()%_setup.population_size();
         int r1G = rand()%_setup.population_size();
         int r2G = rand()%_setup.population_size();
         int r3G = rand()%_setup.population_size();
+        std::cout<<iG;
         while (r1G == r2G || r1G == r3G || r1G == iG || r2G == r3G || r2G == iG || r3G == iG)
         {
             iG = rand()%_setup.population_size();
@@ -326,13 +315,13 @@ void Algorithm::evolution()
             r3G = rand()%_setup.population_size();
         }
         int F = rand()%3;
-        Solution viG1{*_population.at(iG)};
+        Solution viG1{_population.at(iG)};
         for (int j = 0; j < _setup.solution_size(); ++j)
         {
-            viG1.set_position_in_solution(j, _population.at(r1G)->get_position_in_solution(j)
-            + F * (_population.at(r2G)->get_position_in_solution(j) - _population.at(r3G)->get_position_in_solution(j)));
+            viG1.set_position_in_solution(j, _population.at(r1G).get_position_in_solution(j)
+            + F * (_population.at(r2G).get_position_in_solution(j) - _population.at(r3G).get_position_in_solution(j)));
         }
-        Solution uiG1{_population.at(i)->pbm()};
+        Solution uiG1{_population[i].pbm()};
         int Irand = rand()%_setup.solution_size();
         for (int k = 0; k < _setup.population_size(); ++k)
         {
@@ -343,14 +332,15 @@ void Algorithm::evolution()
             }
             if (randij > _setup.CR() && k != Irand)
             {
-                uiG1.set_position_in_solution(k, _population.at(iG)->get_position_in_solution(k));
+                uiG1.set_position_in_solution(k, _population.at(iG).get_position_in_solution(k));
             }
         }
         if (uiG1.fitness() <= _fitness_values_of_current_population.at(iG))
         {
             for (int j = 0; j < _setup.solution_size(); ++j) {
                 for (int j = 0; j < _setup.solution_size(); ++j) {
-                    _global_best_solution->set_position_in_solution(j, _population.at(i)->get_position_in_solution(j));
+                    _global_best_solution.set_position_in_solution(j, _population[i].get_position_in_solution(j));
+                    _global_best_solution.fitness();
                 }
             }
         }
@@ -358,7 +348,7 @@ void Algorithm::evolution()
     }
     for (int l = 0; l < _setup.solution_size(); ++l)
     {
-        std::cout << _global_best_solution->get_position_in_solution(l) << " " << std::endl;
+        std::cout << _global_best_solution.get_position_in_solution(l) << " " << std::endl;
     }
-    std::cout << _global_best_solution->get_fitness();
+    std::cout << _global_best_solution.get_fitness();
 }
