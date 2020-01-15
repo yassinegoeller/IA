@@ -65,11 +65,15 @@ double Problem::weierstrassFunction(std::vector<double> x) const {
     const double pi = 3.14159265358979323846;
     double resultat1 = 0, resultat2 = 0, a = 0.5;
     int b = 3, kmax = 20;
-    for(int i=0; i<_dimension; ++i){
+
+    for(int i=0; i<_dimension; ++i)
+    {
         for(int k=0; k<=kmax; ++k) {
-            resultat1 += (pow(a,k) * cos((2*pi*pow(b, k)) * x.at(i)+0.5));
-            resultat2 += pow(a,k) * cos(2*pi*pow(b,k)*0.5);
+            resultat1 += (pow(a,k) * cos((2*pi*pow(b, k)) * (x.at(i)+0.5)));
         }
+    }
+    for(int k=0; k<=kmax; ++k) {
+        resultat2 += pow(a,k) * cos(2*pi*pow(b,k)*0.5);
     }
     resultat2 = _dimension * resultat2;
 
@@ -77,26 +81,28 @@ double Problem::weierstrassFunction(std::vector<double> x) const {
 }
 
 double Problem::katsuuraFunction(std::vector<double> solution) const {
-    double resultat1=10/(_dimension*_dimension),resultat2=0,resultat3=0;
-    for (int i = 0; i <_dimension ; ++i) {
-        for (int j = 0; j <32 ; ++j) {
-            double tempo = abs(pow(2,j)*solution.at(i)-round(pow(2,j)*solution.at(i)))/pow(2,j);
-            resultat2= resultat2 + tempo;
+    double resultat1 = 10/(_dimension*_dimension), resultat2=0, resultat3 = 1;
+
+    for (int i = 0; i <_dimension ; ++i)
+    {
+        for (int j = 0; j <32 ; ++j)
+        {
+            resultat2 += abs(pow(2,j)*solution.at(i)-round(pow(2,j)*solution.at(i)))/pow(2,j);
         }
-        resultat3=resultat3*(1+i*resultat2);
+        resultat3 *= pow((1+i*resultat2),10/pow(_dimension,1.2));
+        resultat2 = 0;
     }
-    resultat1=resultat1*pow(resultat3,10/pow(_dimension,1.2))-(10/_dimension*_dimension);
-    return resultat1;
+
+    return resultat1 * resultat3 - (10/_dimension*_dimension);
 }
 
 double Problem::happyCatFunction(std::vector<double> solution) const {
-    double somme1=0,somme2=0,somme3=0;
+    double somme1=0,somme2=0;
     for (int i = 0; i <_dimension ; ++i) {
-        somme1+=solution.at(i)*solution.at(i)-_dimension;
-        somme2+=solution.at(i)*solution.at(i);
-        somme3+=solution.at(i);
+        somme1+=solution.at(i)*solution.at(i);
+        somme2+=solution.at(i);
     }
-    double returnValue= pow(abs(somme1),1/4)+((0.5*somme2+somme3)/_dimension)+0.5;
+    double returnValue= pow(abs(somme1),1/4)+((0.5*somme1+somme2)/_dimension)+0.5;
     return returnValue;
 }
 
