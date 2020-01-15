@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <ctime>
 
+
 //=======================================================================
 Problem::Problem(double LowerBound, double UpperBound,int identity, int dimension) : _LowerBound{LowerBound}, _UpperBound{UpperBound},_dimension{dimension},_identity{identity}
 {}
@@ -46,19 +47,20 @@ double Problem::fit_fonction(std::vector<double> x) const {
 }
 
 double Problem::bentCigarFunction(std::vector<double> x) const {
-    double resultat = x.at(0);
+    double resultat = x.at(0)*x.at(0), resultat2 = 0;
     for(int i=1; i<_dimension; i++) {
-        resultat += pow(10,6) * pow(x.at(i),2);
+        resultat2 += x.at(i)*x.at(i);
     }
-    return resultat;
+    resultat2 = resultat2*pow(10, 6);
+    return resultat + resultat2;
 }
 
 double Problem::discusFunction(std::vector<double> x) const {
-    double resultat = pow(10,6) * pow(x.at(0),2);
+    double resultat = pow(10,6) * pow(x.at(0),2), resultat2 = 0;
     for(int i=1; i<_dimension; i++){
-        resultat += pow(x.at(i),2);
+        resultat2 += pow(x.at(i),2);
     }
-    return resultat;
+    return resultat+resultat2;
 }
 
 double Problem::weierstrassFunction(std::vector<double> x) const {
