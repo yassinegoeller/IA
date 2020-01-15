@@ -286,48 +286,48 @@ Solution Algorithm::global_best_solution() const
 
 void Algorithm::evolution()
 {
-    Solution viG1{_population[0].pbm()}, uiG1{_population[0].pbm()};
+    Solution uiG1{_population[0].pbm()};
     int iG, r1G, r2G, r3G, randij, Irand, F;
     for (int i = 0; i < _setup.nb_evolution_steps(); ++i)
     {
-        iG = rand()%_setup.population_size();
-        r1G = rand()%_setup.population_size();
-        r2G = rand()%_setup.population_size();
-        r3G = rand()%_setup.population_size();
-        while (r1G == r2G || r1G == r3G || r1G == iG || r2G == r3G || r2G == iG || r3G == iG)
-        {
+        for (int j = 0; j < _setup.population_size(); ++j) {
             iG = rand()%_setup.population_size();
             r1G = rand()%_setup.population_size();
             r2G = rand()%_setup.population_size();
             r3G = rand()%_setup.population_size();
-        }
-        F = rand()%3;
-        for (int j = 0; j < _setup.solution_size(); ++j)
-        {
-            viG1.set_position_in_solution(j, (_population[r1G].get_position_in_solution(j) + ( F * (_population[r2G].get_position_in_solution(j) - _population[r3G].get_position_in_solution(j)))));
-        }
+            F = (double)rand() / (double)RAND_MAX;
 
-        Irand = rand()%_setup.solution_size();
+            while (r1G == r2G || r1G == r3G || r1G == iG || r2G == r3G || r2G == iG || r3G == iG)
+            {
+                iG = rand()%_setup.population_size();
+                r1G = rand()%_setup.population_size();
+                r2G = rand()%_setup.population_size();
+                r3G = rand()%_setup.population_size();
+            }
 
-        for (int j = 0; j < _setup.solution_size(); ++j)
-        {
-            randij = rand()/RAND_MAX;
-            if (randij <= _setup.CR() || j == Irand)
+            Irand = rand()%_setup.solution_size();
+
+            for (int k = 0; k < _setup.solution_size(); ++k)
             {
-                uiG1.set_position_in_solution(j, viG1.get_position_in_solution(j));
+                randij = rand()/RAND_MAX;
+                if (randij <= _setup.CR() || k == Irand)
+                {
+                    uiG1.set_position_in_solution(k, (_population[r1G].get_position_in_solution(k) + ( F * (_population[r2G].get_position_in_solution(k) - _population[r3G].get_position_in_solution(k)))));
+                }
+                if (randij > _setup.CR() && k != Irand)
+                {
+                    uiG1.set_position_in_solution(k, (_population[j].get_position_in_solution(k)));
+                }
             }
-            if (randij > _setup.CR() && j != Irand)
+
+            if (uiG1.fitness() <= _fitness_values_of_current_population[iG])
             {
-                uiG1.set_position_in_solution(j, (_population[iG].get_position_in_solution(j)));
+                for (int k = 0; k < _setup.solution_size(); ++k) {
+                    _population[j].set_position_in_solution(k, uiG1.get_position_in_solution(k));
+                }
             }
+            evaluate();
         }
-        if (uiG1.fitness() <= _fitness_values_of_current_population[iG])
-        {
-            for (int j = 0; j < _setup.solution_size(); ++j) {
-                _population[iG].set_position_in_solution(j, uiG1.get_position_in_solution(j));
-            }
-        }
-        evaluate();
     }
     for (int l = 0; l < _setup.solution_size(); ++l)
     {
